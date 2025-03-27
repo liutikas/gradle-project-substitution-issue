@@ -35,3 +35,11 @@ a substitution to `project(":libA")`.
 
 In theory, this should just work, but sadly, it seems that classifier type `aar` is kept and when
 project is used, Gradle fails to select the variant.
+
+Note, adding
+```koltin
+artifactSelection {
+    withoutArtifactSelectors()
+}
+```
+does not seem to fix it, despite looking like it should work.
