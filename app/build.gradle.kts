@@ -49,8 +49,7 @@ val projectModules = mapOf(
     "com.example:libA" to ":libA"
 )
 
-afterEvaluate {
-    configurations.configureEach {
+configurations.configureEach {
         resolutionStrategy.dependencySubstitution.apply {
             all {
                 val requested = requested
@@ -70,5 +69,4 @@ afterEvaluate {
             }
         }
     }
-}
 
