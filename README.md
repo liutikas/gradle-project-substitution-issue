@@ -43,3 +43,28 @@ artifactSelection {
 }
 ```
 does not seem to fix it, despite looking like it should work.
+
+Applying the following diff fixes the failure
+```
+diff --git a/repo/com/external/libB/1.0/libB-1.0.pom b/repo/com/external/libB/1.0/libB-1.0.pom
+index 7508e5f..fdc2076 100644
+--- a/repo/com/external/libB/1.0/libB-1.0.pom
++++ b/repo/com/external/libB/1.0/libB-1.0.pom
+@@ -11,7 +11,6 @@
+       <artifactId>libA</artifactId>
+       <version>1.0</version>
+       <scope>compile</scope>
+-      <type>aar</type>
+     </dependency>
+     <dependency>
+       <groupId>org.jetbrains.kotlin</groupId>
+
+```
+
+The difference is that `ProjectArtifactResolver.java:74` call to
+```
+File localArtifactFile = projectStateRegistry.stateFor(projectId).fromMutableState(p -> projectArtifact.getFile());
+```
+In the working case, it returns `classes.jar`
+
+In the broken case, it returns `null`
