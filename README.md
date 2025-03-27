@@ -67,4 +67,8 @@ File localArtifactFile = projectStateRegistry.stateFor(projectId).fromMutableSta
 ```
 In the working case, it returns `classes.jar`
 
+![Working](working.png)
+
 In the broken case, it returns `null`
+
+![Broken](broken.png)
